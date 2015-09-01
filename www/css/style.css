@@ -1,1 +1,12 @@
 /* Empty. Add your own CSS if you like */
+.title.title-left.header-item {
+  text-align: center !important;
+  left: 1px !important;
+}
+.menu-bar{
+  background-color: #EFF1F5;
+  font-family: 'Helvetica Neue', 'Helvetica', Arial, sans-serif;
+  padding: 0;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+}
