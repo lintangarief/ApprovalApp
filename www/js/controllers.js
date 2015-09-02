@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicPopup) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -39,6 +39,20 @@ angular.module('starter.controllers', [])
       $scope.closeLogin();
     }, 1000);
   };
+
+  $scope.logout = function(){
+    $ionicPopup.confirm({
+      title: 'Approval System',
+      template: 'Are you sure you want to Logout?'
+    });
+    confirmPopup.then(function(res) {
+      if(res) {
+        console.log('You are sure');
+      } else {
+        console.log('You are not sure');
+      }
+   })
+  };
 })
 
 .controller('signInCtrl', function($scope) {
@@ -47,6 +61,22 @@ angular.module('starter.controllers', [])
 
 .controller('dashboardCtrl', function($scope) {
   console.log("db")
+})
+
+.controller('approvalsCtrl', function($scope) {
+  console.log("approvalsCtrl")
+})
+
+.controller('profileCtrl', function($scope) {
+  console.log("profileCtrl")
+})
+
+.controller('historyCtrl', function($scope) {
+  console.log("historyCtrl")
+})
+
+.controller('settingCtrl', function($scope) {
+  console.log("settingCtrl")
 })
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {

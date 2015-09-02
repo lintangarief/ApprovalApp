@@ -49,15 +49,55 @@ angular.module('starter', ['ionic', 'starter.controllers'])
           }
         }
       })
-      .state('app.signin', {
-        url: '/signin',
-        views: {
-          'menuContent': {
-            templateUrl: 'templates/signin.html',
-            controller: 'signInCtrl'
-          }
+    .state('app.signin', {
+      url: '/signin',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/signin.html',
+          controller: 'signInCtrl'
         }
-      })
+      }
+    })
+
+    .state('app.approvals',{
+      url: '/approvals',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/approvals.html',
+          controller: 'approvalsCtrl'
+        }
+      }
+    })
+
+    .state('app.profile',{
+      url: '/profile',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/profile.html',
+          controller: 'profileCtrl'
+        }
+      }
+    })
+
+    .state('app.history',{
+      url: '/history',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/history.html',
+          controller: 'historyCtrl'
+        }
+      }
+    })
+
+    .state('app.setting',{
+      url: '/setting',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/setting.html',
+          controller: 'settingCtrl'
+        }
+      }
+    })
 
     .state('app.single', {
       url: '/signin/:playlistId',
