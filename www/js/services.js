@@ -15,6 +15,8 @@ services.factory('ConnectionService', function() {
         states[Connection.CELL]     = 7;//'Cell generic connection';
         states[Connection.NONE]     = 8;//'No network connection';
         return states[networkState];
+      }else{
+        return null;
       }
     }
   };
@@ -49,43 +51,121 @@ services.factory('Storage', function(){
   };
 });
 
-services.factory('UserService', function($q){
+services.factory('UserService', function($q, Storage, $http){
   var objService = {
-    signIn: function(){
-
+    checkLogin: function(){
+      if(Storage.getItem('token') != null){
+        return true
+      }else{
+        return null
+      }
     },
-    signUp: function(){
 
+    signIn: function(params){
+      alert("masuk")
+      var deferred = $q.defer();
+      $http({
+        method  : 'POST',
+        url     : url + 'api/auth/login',
+        data    : "userkey="+params.email+"&password="+params.password,
+        headers : {'Content-Type': 'application/x-www-form-urlencoded'}
+      }).then(function (response) {
+        if(response.data.status == 1){
+          Storage.setItem('user', JSON.stringify(response.data.user));
+          Storage.setItem('token', JSON.stringify(response.data.token));
+        }
+        return deferred.resolve(response.data);
+      });
+      return deferred.promise;
     },
-    changePassword: function(){
 
+    updateAccount: function(params){
+      var deferred = $q.defer();
+      $http.post(url + 'api/user', {})
+        .success(function(data, status, headers, config){
+          deferred.resolve(data);
+        })
+        .error(function(result, status, headers, config){
+          deferred.resolve(result);
+        })
+      return deferred.promise;
     },
-    updateAccount: function(){
 
-    }
-    showAccount: function(){
-
+    logoutAccount: function(params){
+      var deferred = $q.defer();
+      $http.get(url + 'api/auth/logout', {})
+        .success(function(data, status, headers, config){
+          deferred.resolve(data);
+        })
+        .error(function(result, status, headers, config){
+          deferred.resolve(result);
+        })
+      return deferred.promise;
     }
   };
   return objService;
 });
 
-services.factory('', function($q){
+services.factory('PrServices', function($q, $http){
   var objService = {
-    listApprovals: function(){
-
+    listPr: function(){
+      var deferred = $q.defer();
+      $http.get(url + '', {})
+        .success(function(data, status, headers, config){
+          deferred.resolve(data);
+        })
+        .error(function(result, status, headers, config){
+          deferred.resolve(result);
+        })
+      return deferred.promise;
     },
-    showApproval: function(){
 
+    showPr: function(params){
+      var deferred = $q.defer();
+      $http.post(url + '', {})
+        .success(function(data, status, headers, config){
+          deferred.resolve(data);
+        })
+        .error(function(result, status, headers, config){
+          deferred.resolve(result);
+        })
+      return deferred.promise;
     },
-    markApproval: function(){
 
+    acceptApproval: function(params){
+      var deferred = $q.defer();
+      $http.post(url + 'api/accept', {})
+        .success(function(data, status, headers, config){
+          deferred.resolve(data);
+        })
+        .error(function(result, status, headers, config){
+          deferred.resolve(result);
+        })
+      return deferred.promise;
     },
+
     cancleApproval: function(){
-
+      var deferred = $q.defer();
+      $http.post(url + '', {})
+        .success(function(data, status, headers, config){
+          deferred.resolve(data);
+        })
+        .error(function(result, status, headers, config){
+          deferred.resolve(result);
+        })
+      return deferred.promise;
     },
-    listHistoryApprovals: function(){
 
+    listHistoryApprovals: function(){
+      var deferred = $q.defer();
+      $http.post(url + '', {})
+        .success(function(data, status, headers, config){
+          deferred.resolve(data);
+        })
+        .error(function(result, status, headers, config){
+          deferred.resolve(result);
+        })
+      return deferred.promise;
     }
   };
   return objService;

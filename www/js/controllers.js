@@ -1,8 +1,12 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicPopup, Storage) {
-  $scope.loginData = {};
-
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicPopup, Storage, $state, UserService) {
+  $scope.hasLogin = UserService.checkLogin();
+  if($scope.hasLogin == true){
+    $state.go('app.dashboard')
+  }else{
+    $state.go('app.signin')
+  }
   $ionicModal.fromTemplateUrl('templates/login.html', {
     scope: $scope
   }).then(function(modal) {
@@ -32,15 +36,33 @@ angular.module('starter.controllers', [])
     confirmPopup.then(function(res) {
       if(res) {
         console.log('You are sure');
-      } else {
+      }else {
         console.log('You are not sure');
       }
    })
   };
 })
 
-.controller('signInCtrl', function($scope) {
-  console.log("signInCtrl")
+.controller('signInCtrl', function($scope, UserService, $state) {
+  $scope.loginData = {};
+  console.log($scope.hasLogin);
+  $scope.signIn = function(){
+    console.log($scope.loginData)
+    if($scope.loginData.password != null && $scope.loginData.email != null){
+      UserService.signIn($scope.loginData).then(function(result){
+        console.log(result.status)
+        if(result.status == 1){
+          alert("Berhasil nih");
+          $state.go('app.dashboard')
+        }else{
+          alert(result.message)
+        }
+        console.log(JSON.stringify(result))
+      });
+    }else{
+      alert("Harap Melengkapi Akses");
+    }
+  }
 })
 
 .controller('dashboardCtrl', function($scope) {

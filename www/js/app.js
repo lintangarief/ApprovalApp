@@ -1,4 +1,5 @@
-angular.module('starter', ['ionic', 'starter.controllers', 'services'])
+var url = 'http://www.erickwellem.com/demo/approsys/'
+angular.module('starter', ['ionic', 'starter.controllers', 'services', 'ui.router'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -17,7 +18,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'services'])
   $stateProvider
     .state('app', {
       url: '/app',
-      abstract: true,
       templateUrl: 'templates/menu.html',
       controller: 'AppCtrl'
     })
@@ -91,5 +91,5 @@ angular.module('starter', ['ionic', 'starter.controllers', 'services'])
         }
       }
   });
-  $urlRouterProvider.otherwise('/app/signin');
+  $urlRouterProvider.otherwise('/app');
 });
