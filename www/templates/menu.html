@@ -19,31 +19,31 @@
     <ion-content class="menu-bar">
         <ion-list>
           <div class="list card">
-            <a class="item item-icon-left" menu-close="" ui-sref="app.signin">
+            <a class="item item-icon-left" menu-close="" ui-sref="app.signin" ng-if="hasLogin == false">
               <i class="icon ion-android-unlock"></i>
               Login
             </a>
-            <a class="item item-icon-left" menu-close="" ui-sref="app.dashboard">
+            <a class="item item-icon-left" menu-close="" ui-sref="app.dashboard" ng-if="hasLogin == true">
               <i class="icon ion-social-codepen"></i>
               Dashboard
             </a>
-            <a class="item item-icon-left" menu-close="" ui-sref="app.approvals">
+            <a class="item item-icon-left" menu-close="" ui-sref="app.approvals" ng-if="hasLogin == true">
               <i class="icon ion-android-done-all"></i>
               Approvals
             </a>
-            <a class="item item-icon-left" menu-close="" ui-sref="app.profile">
+            <a class="item item-icon-left" menu-close="" ui-sref="app.profile" ng-if="hasLogin == true">
               <i class="icon ion-android-contact"></i>
               Profile
             </a>
-            <a class="item item-icon-left" menu-close="" ui-sref="app.history">
+            <a class="item item-icon-left" menu-close="" ui-sref="app.history" ng-if="hasLogin == true">
               <i class="icon ion-android-list"></i>
               History
             </a>
-            <a class="item item-icon-left" menu-close="" ui-sref="app.setting">
+            <a class="item item-icon-left" menu-close="" ui-sref="app.setting" ng-if="hasLogin == true">
               <i class="icon ion-ios-cog"></i>
               Setting
             </a>
-            <a class="item item-icon-left" href="#" menu-close="" ng-click="logout()">
+            <a class="item item-icon-left" href="#" menu-close="" ng-click="logout()" ng-if="hasLogin == true">
               <i class="icon ion-ios-close"></i>
               Logout
             </a>

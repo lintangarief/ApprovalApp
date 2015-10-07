@@ -16,7 +16,7 @@ services.factory('ConnectionService', function() {
         states[Connection.NONE]     = 8;//'No network connection';
         return states[networkState];
       }else{
-        return null;
+        return null
       }
     }
   };
@@ -51,13 +51,68 @@ services.factory('Storage', function(){
   };
 });
 
+services.factory('HttpService', function($q, $http, Storage){
+  var token = Storage.getItem('token');
+  var objService = {
+    getService: function(query_url){
+      var deferred = $q.defer();
+      $http({
+        method  : 'GET',
+        url     : url + query_url,
+        data    : "token="+token,
+        headers : {'Content-Type': 'application/x-www-form-urlencoded'}
+      }).then(function (response) {
+        return deferred.resolve(response);
+      });
+      return deferred.promise;
+    },
+    postService: function(query_url){
+      var deferred = $q.defer();
+      $http({
+        method  : 'POST',
+        url     : url + query_url,
+        data    : "token="+token,
+        headers : {'Content-Type': 'application/x-www-form-urlencoded'}
+      }).then(function (response) {
+        return deferred.resolve(response);
+      });
+      return deferred.promise;
+    },
+    deleteService: function(query_url){
+      var deferred = $q.defer();
+      $http({
+        method  : 'DELETE',
+        url     : url + query_url,
+        data    : "token="+token,
+        headers : {'Content-Type': 'application/x-www-form-urlencoded'}
+      }).then(function (response) {
+        return deferred.resolve(response);
+      });
+      return deferred.promise;
+    },
+    patchService: function(query_url){
+      var deferred = $q.defer();
+      $http({
+        method  : 'PATCH',
+        url     : url + query_url,
+        data    : "token="+token,
+        headers : {'Content-Type': 'application/x-www-form-urlencoded'}
+      }).then(function (response) {
+        return deferred.resolve(response);
+      });
+      return deferred.promise;
+    }
+  };
+  return objService;
+})
+
 services.factory('UserService', function($q, Storage, $http){
   var objService = {
     checkLogin: function(){
       if(Storage.getItem('token') != null){
         return true
       }else{
-        return null
+        return false
       }
     },
 
@@ -91,17 +146,25 @@ services.factory('UserService', function($q, Storage, $http){
       return deferred.promise;
     },
 
-    logoutAccount: function(params){
+    logoutAccount: function(){
+      var token = Storage.getItem("token");
       var deferred = $q.defer();
-      $http.get(url + 'api/auth/logout', {})
-        .success(function(data, status, headers, config){
-          deferred.resolve(data);
-        })
-        .error(function(result, status, headers, config){
-          deferred.resolve(result);
-        })
+      $http({
+        method  : 'GET',
+        url     : url + 'api/auth/logout',
+        data    : "token="+token,
+        headers : {'Content-Type': 'application/x-www-form-urlencoded'}
+      }).then(function (response) {
+        if(response.data.status = 1){
+          Storage.clearAll()
+          return deferred.resolve(true);
+        }else{
+          return deferred.resolve(false);
+        }
+      });
       return deferred.promise;
     }
+
   };
   return objService;
 });
@@ -169,4 +232,38 @@ services.factory('PrServices', function($q, $http){
     }
   };
   return objService;
-})
+});
+
+services.factory('DasboardServices', function($q, $http, Storage){
+  var token = Storage.getItem('token')
+  var objService = {
+    getDashboard: function() {
+      var deferred = $q.defer();
+      $http({
+        method  : 'GET',
+        url     : url + 'api/auth/getdashboard',
+        data    : "token="+token,
+        headers : {'Content-Type': 'application/x-www-form-urlencoded'}
+      }).then(function (response) {
+        return deferred.resolve(response.data);
+      });
+      return deferred.promise;
+    }
+  };
+  return objService;
+});
+
+services.factory('HistoryServices', function($q, $http, Storage, HttpService){
+  var token = Storage.getItem('token')
+  var objService = {
+    getHistory: function(){
+      var deferred = $q.defer();
+      HttpService.getService('app/auth/getHistory').then(function(response){
+        return deferred.resolve(response.data);
+      })
+      return deferred.promise;
+    }
+  };
+  return objService;
+});
+

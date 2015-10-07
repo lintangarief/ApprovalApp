@@ -18,12 +18,14 @@ angular.module('starter', ['ionic', 'starter.controllers', 'services', 'ui.route
   $stateProvider
     .state('app', {
       url: '/app',
+      cache: false,
       templateUrl: 'templates/menu.html',
       controller: 'AppCtrl'
     })
 
     .state('app.dashboard', {
       url: '/dashboard',
+      cache: false,
       views: {
         'menuContent': {
           templateUrl: 'templates/dashboard.html',
@@ -34,6 +36,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'services', 'ui.route
 
     .state('app.signin', {
       url: '/signin',
+      cache: false,
       views: {
         'menuContent': {
           templateUrl: 'templates/signin.html',
@@ -44,6 +47,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'services', 'ui.route
 
     .state('app.approvals',{
       url: '/approvals',
+      cache: false,
       views: {
         'menuContent': {
           templateUrl: 'templates/approvals.html',
@@ -54,6 +58,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'services', 'ui.route
 
     .state('app.profile',{
       url: '/profile',
+      cache: false,
       views: {
         'menuContent': {
           templateUrl: 'templates/profile.html',
@@ -64,6 +69,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'services', 'ui.route
 
     .state('app.history',{
       url: '/history',
+      cache: false,
       views: {
         'menuContent': {
           templateUrl: 'templates/history.html',
@@ -74,6 +80,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'services', 'ui.route
 
     .state('app.setting',{
       url: '/setting',
+      cache: false,
       views: {
         'menuContent': {
           templateUrl: 'templates/setting.html',
@@ -84,6 +91,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'services', 'ui.route
 
     .state('app.approval', {
       url: '/approvals/:approvalId',
+      cache: false,
       views: {
         'menuContent': {
           templateUrl: 'templates/approval.html',

@@ -1,61 +1,77 @@
 angular.module('starter.controllers', [])
-
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicPopup, Storage, $state, UserService) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicPopup, Storage, $state, UserService, $ionicLoading) {
   $scope.hasLogin = UserService.checkLogin();
   if($scope.hasLogin == true){
-    $state.go('app.dashboard')
+    $state.go('app.dashboard');
   }else{
-    $state.go('app.signin')
+    $state.go('app.signin');
   }
-  $ionicModal.fromTemplateUrl('templates/login.html', {
-    scope: $scope
-  }).then(function(modal) {
-    $scope.modal = modal;
-  });
 
-  $scope.closeLogin = function() {
-    $scope.modal.hide();
+  $scope.show = function() {
+    $ionicLoading.show({
+      template: 'Loading...'
+    });
   };
-
-  $scope.login = function() {
-    $scope.modal.show();
-  };
-
-  $scope.doLogin = function() {
-    console.log('Doing login', $scope.loginData);
-    $timeout(function() {
-      $scope.closeLogin();
-    }, 1000);
+  $scope.hide = function(){
+    $ionicLoading.hide();
   };
 
   $scope.logout = function(){
-    $ionicPopup.confirm({
+    var confirmPopup = $ionicPopup.confirm({
       title: 'Approval System',
       template: 'Are you sure you want to Logout?'
     });
     confirmPopup.then(function(res) {
       if(res) {
+        $scope.show()
         console.log('You are sure');
+        UserService.logoutAccount().then(function(result){
+          if(result == true){
+            $scope.hide()
+            $state.go('app.signin');
+            $scope.hasLogin = false;
+          }else{
+            $scope.hide()
+            console.log("Error");
+          }
+        });
       }else {
         console.log('You are not sure');
       }
    })
   };
+
+  $scope.$on('LoginSuccess', function (event, data) {
+    $scope.hasLogin = data
+  });
 })
 
-.controller('signInCtrl', function($scope, UserService, $state) {
+.controller('signInCtrl', function($scope, UserService, $state, $ionicLoading) {
+
   $scope.loginData = {};
+  
+  $scope.show = function() {
+    $ionicLoading.show({
+      template: 'Loading...'
+    });
+  };
+  $scope.hide = function(){
+    $ionicLoading.hide();
+  };
+
   console.log($scope.hasLogin);
   $scope.signIn = function(){
-    console.log($scope.loginData)
+    $scope.show();
+    console.log($scope.loginData);
     if($scope.loginData.password != null && $scope.loginData.email != null){
       UserService.signIn($scope.loginData).then(function(result){
-        console.log(result.status)
+        console.log(result.status);
         if(result.status == 1){
-          alert("Berhasil nih");
-          $state.go('app.dashboard')
+          $scope.$emit('LoginSuccess', true);
+          $scope.hide();
+          $state.go('app.dashboard');
         }else{
-          alert(result.message)
+          alert(result.message);
         }
         console.log(JSON.stringify(result))
       });
@@ -65,27 +81,59 @@ angular.module('starter.controllers', [])
   }
 })
 
-.controller('dashboardCtrl', function($scope) {
-  console.log("db")
+.controller('dashboardCtrl', function($scope, DasboardServices) {
+  console.log("DashboardCtrl");
 })
 
-.controller('approvalsCtrl', function($scope) {
-  console.log("approvalsCtrl")
+.controller('approvalsCtrl', function($scope, $ionicLoading) {
+  $scope.show = function() {
+    $ionicLoading.show({
+      template: 'Loading...'
+    });
+  };
+  $scope.hide = function(){
+    $ionicLoading.hide();
+  };
+  console.log("approvalsCtrl");
 })
 
-.controller('profileCtrl', function($scope) {
-  console.log("profileCtrl")
+.controller('profileCtrl', function($scope, $ionicLoading) {
+  $scope.show = function() {
+    $ionicLoading.show({
+      template: 'Loading...'
+    });
+  };
+  $scope.hide = function(){
+    $ionicLoading.hide();
+  };
+  console.log("profileCtrl");
 })
 
-.controller('historyCtrl', function($scope) {
-  console.log("historyCtrl")
+.controller('historyCtrl', function($scope, HistoryServices, $ionicLoading) {
+  $scope.show = function() {
+    $ionicLoading.show({
+      template: 'Loading...'
+    });
+  };
+  $scope.hide = function(){
+    $ionicLoading.hide();
+  };
+  console.log("historyCtrl");
 })
 
 .controller('settingCtrl', function($scope) {
-  console.log("settingCtrl")
+  console.log("settingCtrl");
 })
 
-.controller('approvalCtrl', function($scope, $stateParams) {
+.controller('approvalCtrl', function($scope, $stateParams, $ionicLoading) {
+  $scope.show = function() {
+    $ionicLoading.show({
+      template: 'Loading...'
+    });
+  };
+  $scope.hide = function(){
+    $ionicLoading.hide();
+  };
   console.log("approvalCtrl");
-  console.log($stateParams)
-});
+  console.log($stateParams);
+})
