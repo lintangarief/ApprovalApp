@@ -235,16 +235,18 @@ services.factory('PrServices', function($q, $http){
 });
 
 services.factory('DasboardServices', function($q, $http, Storage){
-  var token = Storage.getItem('token')
+  var token = Storage.getObject('token')
+  console.log(url + 'api/dashboard?token='+token)
   var objService = {
     getDashboard: function() {
       var deferred = $q.defer();
       $http({
         method  : 'GET',
-        url     : url + 'api/auth/getdashboard',
-        data    : "token="+token,
+        url     : url + 'api/dashboard?',
+        data: { token: token },
         headers : {'Content-Type': 'application/x-www-form-urlencoded'}
       }).then(function (response) {
+        console.log(response.data);
         return deferred.resolve(response.data);
       });
       return deferred.promise;

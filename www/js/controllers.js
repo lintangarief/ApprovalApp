@@ -49,7 +49,6 @@ angular.module('starter.controllers', [])
 .controller('signInCtrl', function($scope, UserService, $state, $ionicLoading) {
 
   $scope.loginData = {};
-  
   $scope.show = function() {
     $ionicLoading.show({
       template: 'Loading...'
@@ -83,6 +82,11 @@ angular.module('starter.controllers', [])
 
 .controller('dashboardCtrl', function($scope, DasboardServices) {
   console.log("DashboardCtrl");
+  DasboardServices.getDashboard().then(function(result){
+    $scope.current_dashboard = result;
+    console.log($scope.current_dashboard);
+    
+  })
 })
 
 .controller('approvalsCtrl', function($scope, $ionicLoading) {
@@ -126,7 +130,7 @@ angular.module('starter.controllers', [])
 })
 
 .controller('approvalCtrl', function($scope, $stateParams, $ionicLoading) {
-  $scope.show = function() {
+  $scope.show = function(){
     $ionicLoading.show({
       template: 'Loading...'
     });
@@ -136,4 +140,4 @@ angular.module('starter.controllers', [])
   };
   console.log("approvalCtrl");
   console.log($stateParams);
-})
+});
