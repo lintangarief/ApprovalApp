@@ -80,16 +80,16 @@ angular.module('starter.controllers', [])
   }
 })
 
-.controller('dashboardCtrl', function($scope, DasboardServices) {
+.controller('dashboardCtrl', function($scope, DasboardServices, Storage) {
   console.log("DashboardCtrl");
+  $scope.user = Storage.getObject('user');
   DasboardServices.getDashboard().then(function(result){
     $scope.current_dashboard = result;
     console.log($scope.current_dashboard);
-    
   })
 })
 
-.controller('approvalsCtrl', function($scope, $ionicLoading) {
+.controller('approvalsCtrl', function($scope, $ionicLoading, PrServices) {
   $scope.show = function() {
     $ionicLoading.show({
       template: 'Loading...'
@@ -99,9 +99,13 @@ angular.module('starter.controllers', [])
     $ionicLoading.hide();
   };
   console.log("approvalsCtrl");
+  PrServices.listPr().then(function(result){
+    console.log(result)
+    $scope.pr = result;
+  })
 })
 
-.controller('profileCtrl', function($scope, $ionicLoading) {
+.controller('profileCtrl', function($scope, $ionicLoading, Storage, UserService) {
   $scope.show = function() {
     $ionicLoading.show({
       template: 'Loading...'
@@ -111,6 +115,17 @@ angular.module('starter.controllers', [])
     $ionicLoading.hide();
   };
   console.log("profileCtrl");
+  $scope.user = Storage.getObject('user');
+  // UserService.getProfile().then(function(result){
+  //   $scope.user = result;
+  // })
+
+  $scope.update_user = function(params){
+    console.log(params)
+    UserService.updateAccount(params).then(function(result){
+      $scope.user = result
+    })
+  }
 })
 
 .controller('historyCtrl', function($scope, HistoryServices, $ionicLoading) {

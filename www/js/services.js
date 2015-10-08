@@ -135,13 +135,18 @@ services.factory('UserService', function($q, Storage, $http){
     },
 
     updateAccount: function(params){
+      console.log(params)
+      var token = Storage.getObject('token');
+      console.log(token)
       var deferred = $q.defer();
-      $http.post(url + 'api/user', {})
-        .success(function(data, status, headers, config){
-          deferred.resolve(data);
+      $http.post(url + 'api/user?token='+token+"&first_name="+params.first_name+"&last_name="+params.last_name+"&description="+params.description+"email_format=email", {})
+        .success(function(result, status, headers, config){
+          console.log(JSON.stringify(result))
+          console.log(result);
+          deferred.resolve(result);
         })
         .error(function(result, status, headers, config){
-          deferred.resolve(result);
+          deferred.reject(result);
         })
       return deferred.promise;
     },
@@ -163,19 +168,40 @@ services.factory('UserService', function($q, Storage, $http){
         }
       });
       return deferred.promise;
+    },
+    getProfile: function(){
+      var token = Storage.getItem("token");
+      var deferred = $q.defer();
+      $http({
+        method  : 'GET',
+        url     : url + 'api/user',
+        data    : "token="+token,
+        headers : {'Content-Type': 'application/x-www-form-urlencoded'}
+      }).then(function (response) {
+        if(response.data.status = 1){
+          Storage.clearAll()
+          return deferred.resolve(true);
+        }else{
+          return deferred.resolve(false);
+        }
+      });
+      return deferred.promise;
     }
 
   };
   return objService;
 });
 
-services.factory('PrServices', function($q, $http){
+services.factory('PrServices', function($q, $http, Storage){
+  var token = Storage.getObject('token')
+  console.log(url + 'api/pr?token=' + token)
   var objService = {
     listPr: function(){
       var deferred = $q.defer();
-      $http.get(url + '', {})
-        .success(function(data, status, headers, config){
-          deferred.resolve(data);
+      $http.get(url + 'api/pr?token=' + token, {})
+        .success(function(result, status, headers, config){
+          console.log(JSON.stringify(result))
+          deferred.resolve(result.data);
         })
         .error(function(result, status, headers, config){
           deferred.resolve(result);
@@ -239,11 +265,12 @@ services.factory('DasboardServices', function($q, $http, Storage){
   console.log(url + 'api/dashboard?token='+token)
   var objService = {
     getDashboard: function() {
+      console.log("masuk getDashboard")
       var deferred = $q.defer();
       $http({
         method  : 'GET',
-        url     : url + 'api/dashboard?',
-        data: { token: token },
+        url     : url + 'api/dashboard',
+        params: { token: token },
         headers : {'Content-Type': 'application/x-www-form-urlencoded'}
       }).then(function (response) {
         console.log(response.data);
