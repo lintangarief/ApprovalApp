@@ -1,26 +1,30 @@
 <ion-view view-title="APPROVAL SYSTEM" hide-back-button="true">
+  <ion-nav-buttons side="left">
+    <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+    </button>
+  </ion-nav-buttons>
   <div class="bar bar-subheader">
-    <h2 class="title">Listing Approval</h2>
+    <h2 class="title">List PR</h2>
   </div>
   <ion-content>
   <br/>
   <br/>
     <div class="row">
-      <div class="col col-50"><h5>Purchase Requisition (PR)</h5></div>
+      <div class="col col-100"><h3>Purchase Requisition (PR)</h3></div>
     </div>
     <div class="list card" style="margin-top: 0;">
       <div ng-show="pr.length" ng-repeat="item in pr">
         <div class="item item-divider">
-          {{item.id}}}
+          <b>{{item.requisition_number}}</b>
           <span class="item-note">
             {{item.date}}
           </span>
         </div>
         <span class="item" href="#">
-          Company ID : {{item.company}}
+          Company ID : {{item.company_id}}
         </span>
         <span class="item" href="#">
-          Departement : {{item.department}}
+          Department : {{item.department}}
         </span>
         <span class="item" href="#">
           Amount : IDR {{item.amount}}
@@ -28,14 +32,14 @@
         <span class="item" href="#">
           Requester : {{item.requester}}
         </span>
-        <span class="item" href="#">
-          <button class="button button-small button-royal">
+        <span class="item">
+          <button class="button button-small button-royal button-view" ng-click="details(item.id)">
             View
           </button>
-          <button class="button button-small button-royal">
+          <button class="button button-small button-royal button-apprive" ng-click="acceptPr(item.requisition_number)">
             Approve
           </button>
-          <button class="button button-small button-dangger">
+          <button class="button button-small button-dangger button-reject" ng-click="rejectPr(item.requisition_number)">
             Reject
           </button>
         </span>

@@ -17,8 +17,8 @@
           <p>Username: {{user.username}}</p>
         </span>
         <span class="item item-thumbnail-left">
-          <img src="http://www.erickwellem.com/demo/approsys/{{user.photo}}">
-          <h2>Status : Approver User</h2>
+          <img src="http://www.erickwellem.com/demo/approsys/{{user.photo}}" err-src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/128/add_user.png">
+          <h2>Approver User</h2>
         </span>
         <br/>
         <div class="item item-divider">
@@ -26,15 +26,15 @@
         </div>
         <label class="item item-input item-stacked-label">
           <span class="input-label">First Name</span>
-          <input type="text" placeholder="First Name" class="list-inset" value="{{user.first_name}}">
+          <input type="text" placeholder="First Name" class="list-inset" ng-model="user.first_name">
         </label>
         <label class="item item-input item-stacked-label">
           <span class="input-label">Last Name</span>
-          <input type="text" placeholder="Last Name" class="list-inset" value="{{user.last_name}}">
+          <input type="text" placeholder="Last Name" class="list-inset" ng-model="user.last_name">
         </label>
         <label class="item item-input item-stacked-label">
           <span class="input-label">Description</span>
-          <input type="text" placeholder="Description" class="list-inset" value="{{user.description}}">
+          <input type="text" placeholder="Description" class="list-inset" ng-model="user.description">
         </label>
       </div>
     </form>

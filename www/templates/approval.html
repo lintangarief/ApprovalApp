@@ -1,5 +1,87 @@
-<ion-view view-title="Playlist">
+<ion-view view-title="APPROVAL SYSTEM" hide-back-button="true">
+  <ion-nav-buttons side="left">
+    <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+    </button>
+  </ion-nav-buttons>
+  <div class="bar bar-subheader">
+    <h2 class="title">Approval Details</h2>
+  </div>
   <ion-content>
-    <h1>Playlist</h1>
+  	<br/>
+  	<br/>
+    <div class="row">
+      <div><h5>Purchase Requisition (PR)</h5></div>
+    </div>
+    <div class="row">
+    	<div class="card list col">
+    		<div class="item item-divider">
+          {{pr.id}}
+          <span class="item-note">
+            {{pr.date}}
+          </span>
+        </div>
+        <span class="item" href="#">
+          Company ID : {{pr.company_id}}
+        </span>
+        <span class="item" href="#">
+          Departement : {{pr.department}}
+        </span>
+        <span class="item" href="#">
+          Amount : IDR {{pr.amount}}
+        </span>
+        <span class="item" href="#">
+          Requester : {{pr.requester}}
+        </span>
+	    	<span class="item">
+				  <button class="button button-small button-royal" ng-click="details(item.id)">
+				    View
+				  </button>
+				  <button class="button button-small button-royal" ng-click="acceptPr(item.requisition_number)">
+				    Approve
+				  </button>
+				  <button class="button button-small button-dangger" ng-click="rejectPr(item.requisition_number)">
+				    Reject
+				  </button>
+				</span>
+    	</div>
+    </div>
+    <div class="row">
+      <div><h5>Item Details</h5></div>
+    </div>
+    <div class="row">
+    	<div class="list col">
+	    	<div ng-repeat="data in pr.items">
+		    	<div class="card">
+		        <div class="item item-divider">
+		          {{data.item_number}}
+		        </div>
+		        <span class="item" href="#">
+		          Description : {{data.item_description}}
+		        </span>
+		        <span class="item" href="#">
+		          Departement : {{data.department}}
+		        </span>
+		        <span class="item" href="#">
+		          Item UOM : {{data.uom}}
+		        </span>
+		        <span class="item" href="#">
+		          Quantity : {{data.quantity}}
+		        </span>
+		        <span class="item" href="#">
+		          Stock : {{data.stock}}
+		        </span>
+		        <span class="item" href="#">
+		          On Order : {{data.on_order}}
+		        </span>
+		        <span class="item" href="#">
+		          Unit Cost : {{data.unit_cost}}
+		        </span>
+		        <span class="item" href="#">
+		          Extended Cost : {{data.extended_cost}}
+		        </span>
+		       </div>
+	      </div>
+      </div>
+    </div>
   </ion-content>
 </ion-view>

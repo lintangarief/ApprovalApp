@@ -9,7 +9,7 @@
       <li class="item item-toggle">
         HTML Email
          <label class="toggle toggle-assertive">
-           <input type="checkbox">
+           <input type="checkbox" checked="false" ng-model="emailNotification" ng-change="emailChange(emailNotification)">
            <div class="track">
              <div class="handle"></div>
            </div>
@@ -18,7 +18,7 @@
       <li class="item item-toggle">
         App Notification
          <label class="toggle toggle-assertive">
-           <input type="checkbox">
+           <input type="checkbox" checked="true" ng-model="pushNotify" ng-change="pushChange(pushNotify)">
            <div class="track">
              <div class="handle"></div>
            </div>

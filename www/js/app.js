@@ -1,13 +1,12 @@
 var url = 'http://www.erickwellem.com/demo/approsys/'
-angular.module('starter', ['ionic', 'starter.controllers', 'services', 'ui.router'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ui.router'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
-    if (window.cordova && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-      cordova.plugins.Keyboard.disableScroll(true);
-
-    }
+    // if (window.cordova && window.cordova.plugins.Keyboard) {
+    //   cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+    //   cordova.plugins.Keyboard.disableScroll(true);
+    // }
     if (window.StatusBar) {
       StatusBar.styleDefault();
     }
@@ -45,17 +44,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'services', 'ui.route
       }
     })
 
-    .state('app.approvals',{
-      url: '/approvals',
-      cache: false,
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/approvals.html',
-          controller: 'approvalsCtrl'
-        }
-      }
-    })
-
     .state('app.profile',{
       url: '/profile',
       cache: false,
@@ -89,15 +77,27 @@ angular.module('starter', ['ionic', 'starter.controllers', 'services', 'ui.route
       }
     })
 
+    .state('app.approvals',{
+      url: '/approvals',
+      cache: false,
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/approvals.html',
+          controller: 'approvalsCtrl'
+        }
+      }
+    })
+
     .state('app.approval', {
-      url: '/approvals/:approvalId',
+      url: '/approval/:id',
       cache: false,
       views: {
         'menuContent': {
           templateUrl: 'templates/approval.html',
-          controller: 'approvalCtrl'
+          controller: 'approvCtrl'
         }
       }
+      
   });
   $urlRouterProvider.otherwise('/app');
 });

@@ -10,3 +10,34 @@
   margin: 0;
   -webkit-font-smoothing: antialiased;
 }
+.bar.bar-royal{
+	background: #3c8dbc;
+}
+.button.button-royal.active, .button.button-royal.activated{
+	background: #3c8dbc;
+}
+.button.button-royal {
+    border-color: #3c8dbc;
+    background-color: #3c8dbc;
+    color: #fff;
+}
+
+.input-style{
+	font-style: italic;
+	font-weight: bold;
+}
+
+.button-view{
+	background: #3C8DBC;
+	border-color: #3C8DBC;
+}
+
+.button-approve{
+	background: #38903F;
+	border-color: #38903F;
+}
+
+.button-reject{
+	background: #EF2E64;
+	border-color: #EF2E64;
+}

@@ -1,0 +1,100 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/opt/node/bin/node',
+1 verbose cli   '/opt/node/bin/npm',
+1 verbose cli   'i',
+1 verbose cli   'cordova-plugin-whitelist' ]
+2 info using npm@2.7.4
+3 info using node@v0.12.2
+4 warn package.json approvalapps@1.0.0 No repository field.
+5 silly cache add args [ 'cordova-plugin-whitelist', null ]
+6 verbose cache add spec cordova-plugin-whitelist
+7 silly cache add parsed spec { raw: 'cordova-plugin-whitelist',
+7 silly cache add   scope: null,
+7 silly cache add   name: 'cordova-plugin-whitelist',
+7 silly cache add   rawSpec: '',
+7 silly cache add   spec: '*',
+7 silly cache add   type: 'range' }
+8 verbose addNamed cordova-plugin-whitelist@*
+9 silly addNamed semver.valid null
+10 silly addNamed semver.validRange *
+11 silly addNameRange { name: 'cordova-plugin-whitelist', range: '*', hasData: false }
+12 silly mapToRegistry name cordova-plugin-whitelist
+13 silly mapToRegistry using default registry
+14 silly mapToRegistry registry https://registry.npmjs.org/
+15 silly mapToRegistry uri https://registry.npmjs.org/cordova-plugin-whitelist
+16 verbose addNameRange registry:https://registry.npmjs.org/cordova-plugin-whitelist not in flight; fetching
+17 verbose request uri https://registry.npmjs.org/cordova-plugin-whitelist
+18 verbose request no auth needed
+19 info attempt registry request try #1 at 2:34:52 PM
+20 verbose request id de6b1be77b225765
+21 verbose etag "5L9QJB3NGLS4WTHET1PHD2J9T"
+22 http request GET https://registry.npmjs.org/cordova-plugin-whitelist
+23 http 304 https://registry.npmjs.org/cordova-plugin-whitelist
+24 silly get cb [ 304,
+24 silly get   { date: 'Fri, 16 Oct 2015 07:34:53 GMT',
+24 silly get     via: '1.1 varnish',
+24 silly get     'cache-control': 'max-age=60',
+24 silly get     etag: '"5L9QJB3NGLS4WTHET1PHD2J9T"',
+24 silly get     age: '57',
+24 silly get     connection: 'keep-alive',
+24 silly get     'x-served-by': 'cache-sin6926-SIN',
+24 silly get     'x-cache': 'HIT',
+24 silly get     'x-cache-hits': '2',
+24 silly get     'x-timer': 'S1444980893.416752,VS0,VE0',
+24 silly get     vary: 'Accept' } ]
+25 verbose etag https://registry.npmjs.org/cordova-plugin-whitelist from cache
+26 verbose get saving cordova-plugin-whitelist to /home/moka/.npm/registry.npmjs.org/cordova-plugin-whitelist/.cache.json
+27 silly addNameRange number 2 { name: 'cordova-plugin-whitelist', range: '*', hasData: true }
+28 silly addNameRange versions [ 'cordova-plugin-whitelist', [ '1.0.0', '1.1.0' ] ]
+29 verbose addNamed cordova-plugin-whitelist@1.0.0
+30 silly addNamed semver.valid 1.0.0
+31 silly addNamed semver.validRange 1.0.0
+32 silly cache afterAdd cordova-plugin-whitelist@1.0.0
+33 verbose afterAdd /home/moka/.npm/cordova-plugin-whitelist/1.0.0/package/package.json not in flight; writing
+34 verbose afterAdd /home/moka/.npm/cordova-plugin-whitelist/1.0.0/package/package.json written
+35 silly install resolved [ { name: 'cordova-plugin-whitelist',
+35 silly install resolved     version: '1.0.0',
+35 silly install resolved     description: 'Cordova Whitelist Plugin',
+35 silly install resolved     cordova: { platforms: [Object] },
+35 silly install resolved     repository:
+35 silly install resolved      { type: 'git',
+35 silly install resolved        url: 'https://git-wip-us.apache.org/repos/asf/cordova-plugin-whitelist.git' },
+35 silly install resolved     keywords:
+35 silly install resolved      [ 'cordova',
+35 silly install resolved        'whitelist',
+35 silly install resolved        'ecosystem:cordova',
+35 silly install resolved        'cordova-android',
+35 silly install resolved        'cordova-ios' ],
+35 silly install resolved     engines: [ [Object], [Object] ],
+35 silly install resolved     author: { name: 'Apache Software Foundation' },
+35 silly install resolved     license: 'Apache 2.0',
+35 silly install resolved     readme: '<!---\n license: Licensed to the Apache Software Foundation (ASF) under one\n         or more contributor license agreements.  See the NOTICE file\n         distributed with this work for additional information\n         regarding copyright ownership.  The ASF licenses this file\n         to you under the Apache License, Version 2.0 (the\n         "License"); you may not use this file except in compliance\n         with the License.  You may obtain a copy of the License at\n\n           http://www.apache.org/licenses/LICENSE-2.0\n\n         Unless required by applicable law or agreed to in writing,\n         software distributed under the License is distributed on an\n         "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY\n         KIND, either express or implied.  See the License for the\n         specific language governing permissions and limitations\n         under the License.\n-->\n\n# cordova-plugin-whitelist\n\nThis plugin implements a whitelist policy for navigating the application webview on Cordova 4.0\n\n## Supported Cordova Platforms\n\n* Android 4.0.0 or above\n* iOS 4.0.0 or above\n\n## Navigation Whitelist\nControls which URLs the WebView itself can be navigated to. Applies to\ntop-level navigations only.\n\nQuirks: on Android it also applies to iframes for non-http(s) schemes.\n\nBy default, navigations only to `file://` URLs, are allowed. To allow other\nother URLs, you must add `<allow-navigation>` tags to your `config.xml`:\n\n    <!-- Allow links to example.com -->\n    <allow-navigation href="http://example.com/*" />\n\n    <!-- Wildcards are allowed for the protocol, as a prefix\n         to the host, or as a suffix to the path -->\n    <allow-havigation href="*://*.example.com/*" />\n\n    <!-- A wildcard can be used to whitelist the entire network,\n         over HTTP and HTTPS.\n         *NOT RECOMMENDED* -->\n    <allow-navigation href="*" />\n\n    <!-- The above is equivalent to these three declarations -->\n    <allow-navigation href="http://*/*" />\n    <allow-navigation href="https://*/*" />\n    <allow-navigation href="data:*" />\n\n## Intent Whitelist\nControls which URLs the app is allowed to ask the system to open.\nBy default, no external URLs are allowed.\n\nOn Android, this equates to sending an intent of type BROWSEABLE.\n\nThis whitelist does not apply to plugins, only hyperlinks and calls to `window.open()`.\n\nIn `config.xml`, add `<allow-intent>` tags, like this:\n\n    <!-- Allow links to web pages to open in a browser -->\n    <allow-intent href="http://*/*" />\n    <allow-intent href="https://*/*" />\n\n    <!-- Allow links to example.com to open in a browser -->\n    <allow-intent href="http://example.com/*" />\n\n    <!-- Wildcards are allowed for the protocol, as a prefix\n         to the host, or as a suffix to the path -->\n    <allow-intent href="*://*.example.com/*" />\n\n    <!-- Allow SMS links to open messaging app -->\n    <allow-intent href="sms:*" />\n\n    <!-- Allow tel: links to open the dialer -->\n    <allow-intent href="tel:*" />\n\n    <!-- Allow geo: links to open maps -->\n    <allow-intent href="geo:*" />\n\n    <!-- Allow all unrecognized URLs to open installed apps\n         *NOT RECOMMENDED* -->\n    <allow-intent href="*" />\n\n## Network Request Whitelist\nControls which network requests (images, XHRs, etc) are allowed to be made (via cordova native hooks).\n\nNote: We suggest you use a Content Security Policy (see below), which is more secure.  This whitelist is mostly historical for webviews which do not support CSP.\n\nIn `config.xml`, add `<access>` tags, like this:\n\n    <!-- Allow images, xhrs, etc. to google.com -->\n    <access origin="http://google.com" />\n    <access origin="https://google.com" />\n\n    <!-- Access to the subdomain maps.google.com -->\n    <access origin="http://maps.google.com" />\n\n    <!-- Access to all the subdomains on google.com -->\n    <access origin="http://*.google.com" />\n\n    <!-- Enable requests to content: URLs -->\n    <access origin="content:///*" />\n\n    <!-- Don\'t block any requests -->\n    <access origin="*" />\n\nWithout any `<access>` tags, only requests to `file://` URLs are allowed. However, the default Cordova application includes `<access origin="*">` by default.\n\nQuirk: Android also allows requests to https://ssl.gstatic.com/accessibility/javascript/android/ by default, since this is required for TalkBack to function properly.\n\n### Content Security Policy\nControls which network requests (images, XHRs, etc) are allowed to be made (via webview directly).\n\nOn Android and iOS, the network request whitelist (see above) is not able to filter all types of requests (e.g. `<video>` & WebSockets are not blocked). So, in addition to the whitelist, you should use a [Content Security Policy](http://content-security-policy.com/) `<meta>` tag on all of your pages.\n\nOn Android, support for CSP within the system webview starts with KitKat (but is available on all versions using Crosswalk WebView).\n\nHere are some example CSP declarations for your `.html` pages:\n\n    <!-- Good default declaration:\n        * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication\n        * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly\n        * Disables use of eval() and inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:\n            * Enable inline JS: add \'unsafe-inline\' to default-src\n            * Enable eval(): add \'unsafe-eval\' to default-src\n    -->\n    <meta http-equiv="Content-Security-Policy" content="default-src \'self\' data: gap: https://ssl.gstatic.com; style-src \'self\' \'unsafe-inline\'; media-src *">\n\n    <!-- Allow requests to foo.com -->\n    <meta http-equiv="Content-Security-Policy" content="default-src \'self\' foo.com">\n\n    <!-- Enable all requests, inline styles, and eval() -->\n    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src \'self\' \'unsafe-inline\'; script-src: \'self\' \'unsafe-inline\' \'unsafe-eval\'">\n\n    <!-- Allow XHRs via https only -->\n    <meta http-equiv="Content-Security-Policy" content="default-src \'self\' https:">\n\n    <!-- Allow iframe to https://cordova.apache.org/ -->\n    <meta http-equiv="Content-Security-Policy" content="default-src \'self\'; frame-src \'self\' https://cordova.apache.org">\n',
+35 silly install resolved     readmeFilename: 'README.md',
+35 silly install resolved     _id: 'cordova-plugin-whitelist@1.0.0',
+35 silly install resolved     _from: 'cordova-plugin-whitelist@*' } ]
+36 info install cordova-plugin-whitelist@1.0.0 into /home/moka/workspace/ApprovalApp
+37 info installOne cordova-plugin-whitelist@1.0.0
+38 verbose installOne of cordova-plugin-whitelist to /home/moka/workspace/ApprovalApp not in flight; installing
+39 warn locking Error: EACCES, open '/home/moka/.npm/_locks/cordova-plugin-whitelist-4b4acccd34e5292b.lock'
+39 warn locking     at Error (native)
+39 warn locking  /home/moka/.npm/_locks/cordova-plugin-whitelist-4b4acccd34e5292b.lock failed { [Error: EACCES, open '/home/moka/.npm/_locks/cordova-plugin-whitelist-4b4acccd34e5292b.lock']
+39 warn locking   errno: -13,
+39 warn locking   code: 'EACCES',
+39 warn locking   path: '/home/moka/.npm/_locks/cordova-plugin-whitelist-4b4acccd34e5292b.lock' }
+40 verbose stack Error: Attempt to unlock /home/moka/workspace/ApprovalApp/node_modules/cordova-plugin-whitelist, which hasn't been locked
+40 verbose stack     at unlock (/opt/node/lib/node_modules/npm/lib/utils/locker.js:66:11)
+40 verbose stack     at cb (/opt/node/lib/node_modules/npm/lib/install.js:1004:5)
+40 verbose stack     at /opt/node/lib/node_modules/npm/lib/install.js:1008:20
+40 verbose stack     at /opt/node/lib/node_modules/npm/lib/utils/locker.js:40:9
+40 verbose stack     at cb (/opt/node/lib/node_modules/npm/node_modules/lockfile/lockfile.js:149:38)
+40 verbose stack     at /opt/node/lib/node_modules/npm/node_modules/lockfile/lockfile.js:177:38
+40 verbose stack     at FSReqWrap.oncomplete (fs.js:95:15)
+41 verbose cwd /home/moka/workspace/ApprovalApp
+42 error Linux 3.19.0-30-generic
+43 error argv "/opt/node/bin/node" "/opt/node/bin/npm" "i" "cordova-plugin-whitelist"
+44 error node v0.12.2
+45 error npm  v2.7.4
+46 error Attempt to unlock /home/moka/workspace/ApprovalApp/node_modules/cordova-plugin-whitelist, which hasn't been locked
+47 error If you need help, you may report this error at:
+47 error     <https://github.com/npm/npm/issues>
+48 verbose exit [ 1, true ]

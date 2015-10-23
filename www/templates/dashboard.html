@@ -4,19 +4,19 @@
     </button>
   </ion-nav-buttons>
   <div class="bar bar-subheader">
-    <h2 class="title">Your Dashboard</h2>
+    <h2 class="title">Dashboard</h2>
   </div>
   <ion-content>
     <br/>
     <br/>
     <div class="list card" style="margin-top: 5px !important; margin: auto;">
       <a class="item card item-avatar" href="#">
-        <img src="http://www.erickwellem.com/demo/approsys/{{user.photo}}">
+        <img src="http://www.erickwellem.com/demo/approsys/{{user.photo}}" err-src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/128/add_user.png">
         <h2 style="padding-top: 4%;">{{user.first_name + " " + user.last_name}}</h2>
         <p>{{user.description}}</p>
       </a>
       <div class="item item-divider">
-        Notification
+        Notifications
       </div>
       <a class="item" href="#">
         Pending Approval
